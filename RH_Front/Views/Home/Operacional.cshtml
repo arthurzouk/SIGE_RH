@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RH_Front.Models.DadosOperacional>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Operacional";
+}
+
+<h2>Relatório Operacional</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Matricula)</th>
+        <th>@Html.DisplayNameFor(model => model.Cargo)</th>
+        <th>@Html.DisplayNameFor(model => model.Funcionario)</th>
+        <th>@Html.DisplayNameFor(model => model.Jornada)</th>
+        <th>@Html.DisplayNameFor(model => model.Periodo)</th>
+        <th>@Html.DisplayNameFor(model => model.QuantidadeVencida)</th>
+        <th>@Html.DisplayNameFor(model => model.VolumeFinanceiro)</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.Matricula)</td>
+        <td>@Html.DisplayFor(modelItem => item.Cargo)</td>
+        <td>@Html.DisplayFor(modelItem => item.Funcionario)</td>
+        <td>@Html.DisplayFor(modelItem => item.Jornada)</td>
+        <td>@Html.DisplayFor(modelItem => item.Periodo)</td>
+        <td>@Html.DisplayFor(modelItem => item.QuantidadeVencida)</td>
+        <td>@Html.DisplayFor(modelItem => item.VolumeFinanceiro)</td>
+    </tr>
+    }
+</table>

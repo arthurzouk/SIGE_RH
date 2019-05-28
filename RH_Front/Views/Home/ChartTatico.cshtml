@@ -1,0 +1,20 @@
+﻿@{
+    var macChart = new Chart(width: 600, height: 400)
+           .AddTitle("Campeonato Paulista - 2012")
+           .AddSeries(
+            name: "CampeonatoPaulista",
+            xValue: new[] { "São Paulo", "Corinthians", "Palmeiras", "Santos", "Mogi Mirim" },
+            yValues: new[] { "34", "34", "32", "30", "30" })
+        .Write();
+}
+
+
+@*Usando data base para fazer o gráfico
+    @{
+        var db = Database.Open("SmallBakery");
+        var data = db.Query("SELECT Name, Price FROM Product");
+        var myChart = new Chart(width: 600, height: 400)
+            .AddTitle("Product Sales")
+            .DataBindTable(dataSource: data, xField: "Name")
+            .Write();
+    }*@
