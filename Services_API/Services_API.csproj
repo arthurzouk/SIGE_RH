@@ -48,10 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Financeiro\ApiService\ExemploApiService.cs" />
+    <Compile Include="Financeiro\Financeiro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Financeiro\" />
     <Folder Include="Marketing\" />
     <Folder Include="Producao\" />
   </ItemGroup>
