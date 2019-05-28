@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RH_Banco", "RH_Banco\RH_Ban
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services_API", "Services_API\Services_API.csproj", "{7264AC1A-22D4-40BB-9276-35EC8838E39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RH_Domínio", "RH_Domínio\RH_Domínio.csproj", "{D9C462BA-FDAC-47B4-834A-98B07E1BF38A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RH_Dominio", "RH_Domínio\RH_Dominio.csproj", "{D9C462BA-FDAC-47B4-834A-98B07E1BF38A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{62C1F2B0-6F13-4B22-99AC-34D15DE59239}"
 EndProject

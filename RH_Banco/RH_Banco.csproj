@@ -51,12 +51,7 @@
     <Compile Include="Context\RecursosHumanosContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RH_Domínio\RH_Domínio.csproj">
-      <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
-      <Name>RH_Domínio</Name>
-    </ProjectReference>
+    <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -64,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="EntityConfig\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
+      <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
+      <Name>RH_Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

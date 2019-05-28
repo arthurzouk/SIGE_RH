@@ -7,8 +7,8 @@
     <ProjectGuid>{D9C462BA-FDAC-47B4-834A-98B07E1BF38A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RH_Domínio</RootNamespace>
-    <AssemblyName>RH_Domínio</AssemblyName>
+    <RootNamespace>RH_Dominio</RootNamespace>
+    <AssemblyName>RH_Dominio</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

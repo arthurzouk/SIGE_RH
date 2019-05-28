@@ -204,9 +204,9 @@
       <Project>{7eb1a709-2a87-4a39-acfb-02291eccb8d4}</Project>
       <Name>RH_Banco</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RH_Domínio\RH_Domínio.csproj">
+    <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
       <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
-      <Name>RH_Domínio</Name>
+      <Name>RH_Dominio</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services_API\Services_API.csproj">
       <Project>{7264ac1a-22d4-40bb-9276-35ec8838e39f}</Project>
