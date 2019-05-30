@@ -30,7 +30,7 @@ namespace RH_Banco.Repository
             entry.State = EntityState.Modified;
         }
 
-        public virtual void Remover(Guid id)
+        public virtual void Remover(string id)
         {
             var entity = new TEntity { Id = id };
             DbSet.Remove(entity);
@@ -41,7 +41,7 @@ namespace RH_Banco.Repository
             return DbSet.Where(predicate);
         }
 
-        public virtual TEntity ObterPorId(Guid id)
+        public virtual TEntity ObterPorId(string id)
         {
             return DbSet.Find(id);
         }
@@ -54,6 +54,26 @@ namespace RH_Banco.Repository
         public virtual IEnumerable<TEntity> ObterTodosPaginado(int s, int t)
         {
             return DbSet.Take(t).Skip(s);
+        }
+
+        public IEnumerable<TEntity> ObterOnde(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.Where(predicate);
+        }
+
+        public TEntity ObterPrimeiroOuPadrao(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.FirstOrDefault(predicate);
+        }
+
+        public TEntity ObterUltimoOuPadrao(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.LastOrDefault(predicate);
+        }
+
+        public bool TemAlgum(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.Any(predicate);
         }
 
         public int SaveChanges()

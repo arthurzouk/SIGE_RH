@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Demissao.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\PessoaCurriculo.cs" />
+    <Compile Include="Models\Recrutamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

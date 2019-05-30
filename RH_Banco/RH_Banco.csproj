@@ -49,17 +49,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\RecursosHumanosContext.cs" />
+    <Compile Include="EntityConfig\DemissaoConfiguration.cs" />
+    <Compile Include="EntityConfig\PessoaCurriculoConfiguration.cs" />
+    <Compile Include="EntityConfig\RecrutamentoConfiguration.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\DemissaoRepository.cs" />
+    <Compile Include="Repository\PessoaCurriculoRepository.cs" />
+    <Compile Include="Repository\RecrutamentoRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntityConfig\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
       <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
