@@ -111,13 +111,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RH_Banco\RH_Banco.csproj">
-      <Project>{7eb1a709-2a87-4a39-acfb-02291eccb8d4}</Project>
-      <Name>RH_Banco</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
-      <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
-      <Name>RH_Dominio</Name>
+    <ProjectReference Include="..\RH_AppService\RH_Application.csproj">
+      <Project>{e73cbaa2-14ae-41bd-8cd9-6acb78b70ba9}</Project>
+      <Name>RH_Application</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

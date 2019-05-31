@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RH_Dominio.Models
+namespace RH_AppService.ViewModels
 {
-    public class Recrutamento : Entity
+    public class RecrutamentoViewModel
     {
         public int IdProcesso { get; set; }
         public DateTime DataAbertura { get; set; }
@@ -17,6 +17,5 @@ namespace RH_Dominio.Models
         public string Observacoes { get; set; }
 
         public string PessoaCurriculoId { get; set; }
-        public virtual PessoaCurriculo PessoaCurriculo { get; set; }
     }
 }

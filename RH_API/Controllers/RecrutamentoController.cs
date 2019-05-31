@@ -1,6 +1,6 @@
-﻿using RH_Banco.Context;
-using RH_Banco.Repository;
-using RH_Dominio.Models;
+﻿using Newtonsoft.Json;
+using RH_Application.AppServices;
+using RH_AppService.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +12,15 @@ namespace RH_API.Controllers
 {
     public class RecrutamentoController : ApiController
     {
-        public RecrutamentoController()
-        {
-
-        }
+        private PessoaCurriculoAppService _pessoaCurriculoAppService;
 
         [HttpGet]
-        public IEnumerable<PessoaCurriculo> ObterCurriculosDasPessoas()
+        public IEnumerable<PessoaCurriculoViewModel> ObterCurriculosDasPessoas()
         {
-            RecursosHumanosContext context = new RecursosHumanosContext();
-            PessoaCurriculoRepository pessoaCurriculoRepository = new PessoaCurriculoRepository(context);
-            return pessoaCurriculoRepository.ObterTodos();
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+            var retorno = _pessoaCurriculoAppService.ObterCurriculosDasPessoas();
+
+            return retorno;
         }
     }
 }

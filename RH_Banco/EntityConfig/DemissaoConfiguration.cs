@@ -22,7 +22,7 @@ namespace RH_Banco.EntityConfig
             Property(x => x.QuantidadeDeFalhas).IsRequired().HasColumnName("quantidade_falhas");
             Property(x => x.Motivo).HasMaxLength(1000).IsRequired().HasColumnName("motivo");
             Property(x => x.FalhaGrave).IsRequired().HasColumnName("falha_grave");
-            Property(x => x.PessoaCurriculoId).HasColumnName("pessoaId");
+            Property(x => x.PessoaCurriculoId).HasColumnName("pessoa_id");
 
             // Relationships
             HasRequired(x => x.PessoaCurriculo).WithMany(x => x.Demissoes).HasForeignKey(x => x.PessoaCurriculoId);
