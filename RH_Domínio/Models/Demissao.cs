@@ -12,7 +12,7 @@ namespace RH_Dominio.Models
         public string Motivo { get; set; }
         public bool FalhaGrave { get; set; }
 
-        public string IdFuncionario { get; set; }
-        public virtual PessoaCurriculo Funcionario { get; set; }
+        public string PessoaCurriculoId { get; set; }
+        public virtual PessoaCurriculo PessoaCurriculo { get; set; }
     }
 }

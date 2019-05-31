@@ -6,7 +6,7 @@ namespace RH_Banco.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(RH_Banco.Context.RecursosHumanosContext context)

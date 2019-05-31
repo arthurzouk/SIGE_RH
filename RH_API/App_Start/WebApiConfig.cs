@@ -12,7 +12,7 @@ namespace RH_API
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "RecursosHumanos",
+                name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );

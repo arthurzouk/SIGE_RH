@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using RH_Banco.EntityConfig;
+using RH_Dominio.Models;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace RH_Banco.Context
@@ -10,7 +12,9 @@ namespace RH_Banco.Context
 
         }
 
-        //public DbSet<COLOCAR_CLASSE_DOMINIO_AQUI> EbayAuthTokens { get; set; }
+        public DbSet<PessoaCurriculo> PessoasCurriculo { get; set; }
+        public DbSet<Recrutamento> Recrutamento { get; set; }
+        public DbSet<Demissao> Demissoes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -30,7 +34,9 @@ namespace RH_Banco.Context
                 .Configure(p => p.HasMaxLength(100));
 
             // Adicionar configurações de tabelas
-            //modelBuilder.Configurations.Add(new COLOCAR_CLASSE_DE_CONFIG_AQUI());
+            modelBuilder.Configurations.Add(new PessoaCurriculoConfiguration());
+            modelBuilder.Configurations.Add(new RecrutamentoConfiguration());
+            modelBuilder.Configurations.Add(new DemissaoConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

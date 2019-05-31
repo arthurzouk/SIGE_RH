@@ -11,9 +11,9 @@ namespace RH_Dominio.Models
         public string Endereco { get; set; }
         public string Escolaridade { get; set; }
         public string Curso { get; set; }
+        public decimal Salario { get; set; }
 
         public virtual ICollection<Demissao> Demissoes { get; set; }
         public virtual ICollection<Recrutamento> Recrutamentos { get; set; }
-        public virtual ICollection<Recrutamento> RecrutamentosAprovados { get; set; }
     }
 }

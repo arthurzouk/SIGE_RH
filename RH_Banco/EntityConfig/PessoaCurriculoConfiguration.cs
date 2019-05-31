@@ -11,32 +11,20 @@ namespace RH_Banco.EntityConfig
             HasKey(x => x.Id);
 
             // Table & Column Mappings
-            ToTable("PessoaCurriculo");
+            ToTable("Pessoa");
             HasIndex(x => x.CPF).IsUnique();
 
             // Configurations
-            Property(x => x.Nome).HasMaxLength(150).IsRequired();
-            Property(x => x.DataNascimento).IsRequired();
-            Property(x => x.Endereco).HasMaxLength(200).IsRequired();
-            Property(x => x.Escolaridade).IsRequired();
-            Property(x => x.Curso).IsRequired();
+            Property(x => x.CPF).HasMaxLength(11).IsRequired().HasColumnName("cpf");
+            Property(x => x.Nome).HasMaxLength(150).IsRequired().HasColumnName("nome");
+            Property(x => x.DataNascimento).IsRequired().HasColumnName("data_nascimento");
+            Property(x => x.Endereco).HasMaxLength(200).IsRequired().HasColumnName("endereco");
+            Property(x => x.Escolaridade).IsRequired().HasColumnName("escolaridade");
+            Property(x => x.Curso).IsRequired().HasColumnName("curso");
+            Property(x => x.Salario).IsRequired().HasColumnName("salario");
 
             // Relationships
-            HasMany(x => x.Recrutamentos).WithMany(x => x.Candidatos)
-                .Map(um =>
-                {
-                    um.MapLeftKey("pessoaCurriculoId");
-                    um.MapRightKey("recrutamentoId");
-                    um.ToTable("CandidatosRecrutamentos");
-                });
-
-            HasMany(x => x.RecrutamentosAprovados).WithMany(m => m.Aprovados)
-                .Map(um =>
-                {
-                    um.MapLeftKey("pessoaCurriculoId");
-                    um.MapRightKey("recrutamentoId");
-                    um.ToTable("AprovadosRecrutamentos");
-                });
+            
         }
     }
 }

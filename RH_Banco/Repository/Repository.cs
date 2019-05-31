@@ -16,6 +16,7 @@ namespace RH_Banco.Repository
         public Repository(RecursosHumanosContext context)
         {
             Db = context;
+            DbSet = Db.Set<TEntity>();
         }
 
         public virtual void Adicionar(TEntity obj)

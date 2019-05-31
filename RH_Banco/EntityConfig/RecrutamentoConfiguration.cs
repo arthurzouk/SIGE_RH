@@ -15,15 +15,21 @@ namespace RH_Banco.EntityConfig
             HasIndex(x => x.IdProcesso).IsUnique();
 
             // Configurations
-            Property(x => x.DataAbertura).IsRequired();
-            Property(x => x.DataFechamento).IsRequired();
-            Property(x => x.SetorSolicitante).HasMaxLength(50).IsRequired();
-            Property(x => x.Responsavel).IsRequired();
-            Property(x => x.Situacao).IsRequired();
-            Property(x => x.PerfilVaga).HasMaxLength(1000).IsRequired();
-            Property(x => x.TestesAAplicar).HasMaxLength(500).IsRequired();
-            Property(x => x.Entrevistador).HasMaxLength(150).IsRequired();
-            Property(x => x.Observacoes).HasMaxLength(1000).IsOptional();
+            Property(x => x.IdProcesso).IsRequired().HasColumnName("idprocesso");
+            Property(x => x.DataAbertura).IsRequired().HasColumnName("data_abertura");
+            Property(x => x.DataFechamento).IsRequired().HasColumnName("data_fechamento");
+            Property(x => x.SetorSolicitante).HasMaxLength(50).IsRequired().HasColumnName("setor_solicitante");
+            Property(x => x.Responsavel).IsRequired().HasColumnName("responsavel");
+            Property(x => x.Situacao).IsRequired().HasColumnName("situacao");
+            Property(x => x.PerfilVaga).HasMaxLength(1000).IsRequired().HasColumnName("perfil_vaga");
+            Property(x => x.TestesAAplicar).HasMaxLength(500).IsRequired().HasColumnName("testes_aplicar");
+            Property(x => x.Entrevistador).HasMaxLength(150).IsRequired().HasColumnName("entrevistador");
+            Property(x => x.Aprovado).IsRequired().HasColumnName("aprovado");
+            Property(x => x.Observacoes).HasMaxLength(1000).IsOptional().HasColumnName("observacoes");
+            Property(x => x.PessoaCurriculoId).HasColumnName("pessoaId");
+
+            // Relationships
+            HasRequired(x => x.PessoaCurriculo).WithMany(x => x.Recrutamentos).HasForeignKey(x => x.PessoaCurriculoId);
         }
     }
 }
