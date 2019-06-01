@@ -24,9 +24,21 @@ namespace RH_Application.AppServices
             return retorno;
         }
 
+        public PessoaCurriculoViewModel ObterCurriculoPorCpf(string cpf)
+        {
+            var retorno = Mapper.Map<PessoaCurriculoViewModel>(_pessoaCurriculoRepository.ObterPrimeiroOuPadrao(x => x.CPF == cpf));
+            return retorno;
+        }
+
         public PessoaCurriculoViewModel ObterCurriculoPorIdProcessoDoRecrutamento(int idProcesso)
         {
             var retorno = Mapper.Map<PessoaCurriculoViewModel>(_pessoaCurriculoRepository.ObterPrimeiroOuPadrao(x => x.Recrutamentos.Any(y => y.IdProcesso == idProcesso)));
+            return retorno;
+        }
+
+        public PessoaCurriculoViewModel ObterCurriculoPorIdProcessoDeDemissao(int idProcesso)
+        {
+            var retorno = Mapper.Map<PessoaCurriculoViewModel>(_pessoaCurriculoRepository.ObterPrimeiroOuPadrao(x => x.Demissoes.Any(y => y.IdProcesso == idProcesso)));
             return retorno;
         }
     }

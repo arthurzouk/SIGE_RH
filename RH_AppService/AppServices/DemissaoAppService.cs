@@ -1,20 +1,32 @@
-﻿using RH_Banco.Context;
+﻿using AutoMapper;
+using RH_AppService.ViewModels;
+using RH_Banco.Context;
 using RH_Banco.Repository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RH_Application.AppServices
 {
     public class DemissaoAppService
     {
+        private RecursosHumanosContext _context;
         private DemissaoRepository _demissaoRepository;
 
-        public DemissaoAppService(RecursosHumanosContext context)
+        public DemissaoAppService()
         {
-            _demissaoRepository = new DemissaoRepository(context);
+            _context = new RecursosHumanosContext();
+            _demissaoRepository = new DemissaoRepository(_context);
+        }
+
+        public IEnumerable<DemissaoViewModel> ObterTodasDemissoes()
+        {
+            var retorno = Mapper.Map<IEnumerable<DemissaoViewModel>>(_demissaoRepository.ObterTodos());
+            return retorno;
+        }
+
+        public DemissaoViewModel ObterDemissaoPorIdProcesso(int idProcesso)
+        {
+            var retorno = Mapper.Map<DemissaoViewModel>(_demissaoRepository.ObterPrimeiroOuPadrao(x => x.IdProcesso == idProcesso));
+            return retorno;
         }
     }
 }
