@@ -21,6 +21,7 @@ namespace RH_Application.ViewModels
         public string Entrevistador { get; set; }
         public bool Aprovado { get; set; }
         public string Observacoes { get; set; }
+        public decimal Custo { get; set; }
 
         public string PessoaCurriculoId { get; set; }
     }

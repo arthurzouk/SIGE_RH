@@ -15,6 +15,7 @@ namespace RH_Dominio.Models
         public string Entrevistador { get; set; }
         public bool Aprovado { get; set; }
         public string Observacoes { get; set; }
+        public decimal Custo { get; set; }
 
         public string PessoaCurriculoId { get; set; }
         public virtual PessoaCurriculo PessoaCurriculo { get; set; }

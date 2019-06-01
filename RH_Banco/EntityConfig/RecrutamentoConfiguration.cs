@@ -27,6 +27,7 @@ namespace RH_Banco.EntityConfig
             Property(x => x.Aprovado).IsRequired().HasColumnName("aprovado");
             Property(x => x.Observacoes).HasMaxLength(1000).IsOptional().HasColumnName("observacoes");
             Property(x => x.PessoaCurriculoId).HasColumnName("pessoa_id");
+            Property(x => x.Custo).IsRequired().HasColumnName("custo");
 
             // Relationships
             HasRequired(x => x.PessoaCurriculo).WithMany(x => x.Recrutamentos).HasForeignKey(x => x.PessoaCurriculoId);
