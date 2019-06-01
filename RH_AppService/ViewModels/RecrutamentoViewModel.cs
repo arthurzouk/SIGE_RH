@@ -1,9 +1,15 @@
 ﻿using System;
 
-namespace RH_AppService.ViewModels
+namespace RH_Application.ViewModels
 {
     public class RecrutamentoViewModel
     {
+        public RecrutamentoViewModel()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        public string Id { get; set; }
         public int IdProcesso { get; set; }
         public DateTime DataAbertura { get; set; }
         public DateTime DataFechamento { get; set; }

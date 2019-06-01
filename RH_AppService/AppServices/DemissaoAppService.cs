@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RH_AppService.ViewModels;
+using RH_Application.ViewModels;
 using RH_Banco.Context;
 using RH_Banco.Repository;
 using System.Collections.Generic;

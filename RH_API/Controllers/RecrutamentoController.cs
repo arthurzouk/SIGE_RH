@@ -1,5 +1,5 @@
 ﻿using RH_Application.AppServices;
-using RH_AppService.ViewModels;
+using RH_Application.ViewModels;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -33,10 +33,28 @@ namespace RH_API.Controllers
 
         [AcceptVerbs("GET")]
         [Route("ObterCurriculoPorProcesso")]
-        public PessoaCurriculoViewModel ObterCurriculoPorProcesso(int processo_id)
+        public PessoaRecrutamentoViewModel ObterCurriculoPorProcesso(int processo_id)
         {
             _pessoaCurriculoAppService = new PessoaCurriculoAppService();
             var retorno = _pessoaCurriculoAppService.ObterCurriculoPorIdProcessoDoRecrutamento(processo_id);
+
+            return retorno;
+        }
+
+        [AcceptVerbs("GET")]
+        [Route("ObterCurriculosAprovados")]
+        public IEnumerable<PessoaRecrutamentoViewModel> ObterCurriculosAprovados()
+        {
+            _recrutamentoAppService = new RecrutamentoAppService();
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+            var retorno = new List<PessoaRecrutamentoViewModel>();
+
+            var todosRecrutamentos = _recrutamentoAppService.ObterTodosRecrutamentos();
+            foreach(var i in todosRecrutamentos)
+            {
+                var curriculo = _pessoaCurriculoAppService.ObterCurriculoPorIdProcessoDoRecrutamento(i.IdProcesso);
+                if (curriculo.Recrutamento.Aprovado) retorno.Add(curriculo);
+            }
 
             return retorno;
         }
