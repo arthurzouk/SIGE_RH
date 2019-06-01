@@ -34,16 +34,30 @@ namespace RH_Application.AppServices
             return retorno;
         }
 
-        public IEnumerable<PessoaCurriculoViewModel> ObterPessoasAtivas()
+        public IEnumerable<PessoaRecrutamentoViewModel> ObterPessoasAtivas()
         {
             var pessoasAtivas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado && y.Situacao == "Contratado")));
-            return pessoasAtivas;
+
+            var retorno = new List<PessoaRecrutamentoViewModel>();
+            foreach(var i in pessoasAtivas)
+            { 
+                var recrutamento = Mapper.Map<RecrutamentoViewModel>(_recrutamentoRepository.ObterPrimeiroOuPadrao(x => x.PessoaCurriculoId == i.Id));
+                retorno.Add(new PessoaRecrutamentoViewModel { PessoaCurriculo = i, Recrutamento = recrutamento });
+            }
+            return retorno;
         }
 
-        public IEnumerable<PessoaCurriculoViewModel> ObterPessoasDemitidas()
+        public IEnumerable<PessoaDemissaoViewModel> ObterPessoasDemitidas()
         {
             var pessoasDemitidas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Demissoes.Any(y => y.QuantidadeDeFalhas > 9 || y.FalhaGrave)));
-            return pessoasDemitidas;
+
+            var retorno = new List<PessoaDemissaoViewModel>();
+            foreach (var i in pessoasDemitidas)
+            {
+                var demissao = Mapper.Map<DemissaoViewModel>(_demissaoRepository.ObterPrimeiroOuPadrao(x => x.PessoaCurriculoId == i.Id));
+                retorno.Add(new PessoaDemissaoViewModel { PessoaCurriculo = i, Demissao = demissao });
+            }
+            return retorno;
         }
 
         public PessoaRecrutamentoViewModel ObterCurriculoPorIdProcessoDoRecrutamento(int idProcesso)

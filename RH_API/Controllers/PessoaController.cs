@@ -32,7 +32,7 @@ namespace RH_API.Controllers
 
         [AcceptVerbs("GET")]
         [Route("ObterFuncionariosAtivos")]
-        public IEnumerable<PessoaCurriculoViewModel> ObterFuncionariosAtivos()
+        public IEnumerable<PessoaRecrutamentoViewModel> ObterFuncionariosAtivos()
         {
             _pessoaCurriculoAppService = new PessoaCurriculoAppService();
             var retorno = _pessoaCurriculoAppService.ObterPessoasAtivas();
@@ -42,7 +42,7 @@ namespace RH_API.Controllers
 
         [AcceptVerbs("GET")]
         [Route("ObterFuncionariosDemitidos")]
-        public IEnumerable<PessoaCurriculoViewModel> ObterFuncionariosDemitidos()
+        public IEnumerable<PessoaDemissaoViewModel> ObterFuncionariosDemitidos()
         {
             _pessoaCurriculoAppService = new PessoaCurriculoAppService();
             var retorno = _pessoaCurriculoAppService.ObterPessoasDemitidas();

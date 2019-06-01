@@ -42,7 +42,7 @@ namespace RH_API.Controllers
         }
 
         [AcceptVerbs("GET")]
-        [Route("ObterCurriculoPorProcesso")]
+        [Route("ObterPessoasDemitidas")]
         public IEnumerable<PessoaDemissaoViewModel> ObterPessoasDemitidas()
         {
             _pessoaCurriculoAppService = new PessoaCurriculoAppService();
@@ -52,8 +52,11 @@ namespace RH_API.Controllers
             var retorno = new List<PessoaDemissaoViewModel>();
             foreach (var i in processosDemissao)
             { 
-                var pessoaDemitida = _pessoaCurriculoAppService.ObterCurriculoPorIdProcessoDeDemissao(i.IdProcesso);
-                retorno.Add(pessoaDemitida);
+                var pessoaDemissao = _pessoaCurriculoAppService.ObterCurriculoPorIdProcessoDeDemissao(i.IdProcesso);
+                if (pessoaDemissao.Demissao.FalhaGrave || pessoaDemissao.Demissao.QuantidadeDeFalhas > 9)
+                {
+                    retorno.Add(pessoaDemissao);
+                }
             }
 
             return retorno;
