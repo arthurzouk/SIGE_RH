@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RH_AppService.ViewModels;
+using RH_Application.ViewModels;
 using RH_Dominio.Models;
 
 namespace RH_Application.AutoMapper

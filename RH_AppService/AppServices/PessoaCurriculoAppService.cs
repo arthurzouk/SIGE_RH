@@ -36,35 +36,13 @@ namespace RH_Application.AppServices
 
         public IEnumerable<PessoaCurriculoViewModel> ObterPessoasAtivas()
         {
-            var pessoasAprovadas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado)));
-            var demissoes = Mapper.Map<IEnumerable<DemissaoViewModel>>(_demissaoRepository.ObterTodos());
-
-            var pessoasAtivas = new List<PessoaCurriculoViewModel>();
-            foreach (var i in pessoasAprovadas)
-            {
-                if (demissoes.Any(x => x.PessoaCurriculoId == i.Id && (!x.FalhaGrave || x.QuantidadeDeFalhas <= 9)))
-                {
-                    pessoasAtivas.Add(i);
-                }
-            }
-
+            var pessoasAtivas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado && y.Situacao == "Contratado")));
             return pessoasAtivas;
         }
 
         public IEnumerable<PessoaCurriculoViewModel> ObterPessoasDemitidas()
         {
-            var pessoasAprovadas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado)));
-            var demissoes = Mapper.Map<IEnumerable<DemissaoViewModel>>(_demissaoRepository.ObterTodos());
-
-            var pessoasDemitidas = new List<PessoaCurriculoViewModel>();
-            foreach (var i in pessoasAprovadas)
-            {
-                if (demissoes.Any(x => x.PessoaCurriculoId == i.Id && (x.FalhaGrave || x.QuantidadeDeFalhas > 9)))
-                {
-                    pessoasDemitidas.Add(i);
-                }
-            }
-
+            var pessoasDemitidas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Demissoes.Any(y => y.QuantidadeDeFalhas > 9 || y.FalhaGrave)));
             return pessoasDemitidas;
         }
 
