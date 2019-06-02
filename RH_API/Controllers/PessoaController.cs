@@ -31,6 +31,57 @@ namespace RH_API.Controllers
         }
 
         [AcceptVerbs("GET")]
+        [Route("ObterFuncionariosArea")]
+        public IEnumerable<FuncionarioViewModel> ObterFuncionariosArea()
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+            var pessoasRecrutamento = _pessoaCurriculoAppService.ObterPessoasAtivas();
+            var retorno = new List<FuncionarioViewModel>();
+            foreach (var pessoaRecrut in pessoasRecrutamento)
+            {
+                retorno.Add(new FuncionarioViewModel
+                {
+                    Id = pessoaRecrut.PessoaCurriculo.Id,
+                    CPF = pessoaRecrut.PessoaCurriculo.CPF,
+                    Nome = pessoaRecrut.PessoaCurriculo.Nome,
+                    DataNascimento = pessoaRecrut.PessoaCurriculo.DataNascimento,
+                    Endereco = pessoaRecrut.PessoaCurriculo.Endereco,
+                    Escolaridade = pessoaRecrut.PessoaCurriculo.Escolaridade,
+                    Curso = pessoaRecrut.PessoaCurriculo.Curso,
+                    AreaFuncional = pessoaRecrut.Recrutamento.SetorSolicitante
+                });
+            }
+
+            return retorno;
+        }
+
+        [AcceptVerbs("GET")]
+        [Route("ObterFuncionariosSalarioArea")]
+        public IEnumerable<FuncionarioSalarioViewModel> ObterFuncionariosSalarioArea()
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+            var pessoasRecrutamento = _pessoaCurriculoAppService.ObterPessoasAtivas();
+            var retorno = new List<FuncionarioSalarioViewModel>();
+            foreach (var pessoaRecrut in pessoasRecrutamento)
+            {
+                retorno.Add(new FuncionarioSalarioViewModel
+                {
+                    Id = pessoaRecrut.PessoaCurriculo.Id,
+                    CPF = pessoaRecrut.PessoaCurriculo.CPF,
+                    Nome = pessoaRecrut.PessoaCurriculo.Nome,
+                    DataNascimento = pessoaRecrut.PessoaCurriculo.DataNascimento,
+                    Endereco = pessoaRecrut.PessoaCurriculo.Endereco,
+                    Escolaridade = pessoaRecrut.PessoaCurriculo.Escolaridade,
+                    Curso = pessoaRecrut.PessoaCurriculo.Curso,
+                    Salario = pessoaRecrut.PessoaCurriculo.Salario,
+                    AreaFuncional = pessoaRecrut.Recrutamento.SetorSolicitante
+                });
+            }
+
+            return retorno;
+        }
+
+        [AcceptVerbs("GET")]
         [Route("ObterFuncionariosAtivos")]
         public IEnumerable<PessoaRecrutamentoViewModel> ObterFuncionariosAtivos()
         {
