@@ -2,6 +2,7 @@
 using RH_Application.ViewModels;
 using RH_Banco.Context;
 using RH_Banco.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -82,6 +83,44 @@ namespace RH_Application.AppServices
                 Demissao = demissao
             };
             return pessoaDemissao;
+        }
+
+        public FuncionarioReclamacaoViewModel ObterFuncionarioReclamacao()
+        {
+            var pessoasAtivas = ObterPessoasAtivas();
+            var pessoasInativas = ObterPessoasDemitidas();
+
+            var random = new Random();
+            var melhoria = random.Next(1, 3);
+            var ativoOuInativo = random.Next(0, 1);
+            if (ativoOuInativo == 1)
+            {
+                var tamanhoLista = pessoasAtivas.Count();
+                var indexAleatorio = random.Next(0, tamanhoLista - 1);
+                var pessoaAtiva = pessoasAtivas.ElementAt(indexAleatorio);
+                return new FuncionarioReclamacaoViewModel
+                {
+                    CPF = pessoaAtiva.PessoaCurriculo.CPF,
+                    Nome = pessoaAtiva.PessoaCurriculo.Nome,
+                    AreaFuncional = pessoaAtiva.Recrutamento.SetorSolicitante,
+                    Situacao = "Ativo",
+                    Melhoria = melhoria == 1 ? "Sim" : melhoria == 2 ? "Não" : "Pendente"
+                };
+            }
+            else
+            {
+                var tamanhoLista = pessoasInativas.Count();
+                var indexAleatorio = random.Next(0, tamanhoLista - 1);
+                var pessoaAtiva = pessoasInativas.ElementAt(indexAleatorio);
+                return new FuncionarioReclamacaoViewModel
+                {
+                    CPF = pessoaAtiva.PessoaCurriculo.CPF,
+                    Nome = pessoaAtiva.PessoaCurriculo.Nome,
+                    AreaFuncional = pessoaAtiva.Demissao.SetorSolicitante,
+                    Situacao = "Ativo",
+                    Melhoria = melhoria == 1 ? "Sim" : melhoria == 2 ? "Não" : "Pendente"
+                };
+            }
         }
     }
 }

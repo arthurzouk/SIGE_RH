@@ -100,5 +100,16 @@ namespace RH_API.Controllers
 
             return retorno;
         }
+
+        [AcceptVerbs("GET")]
+        [Route("ReceberReclamacao")]
+        public FuncionarioReclamacaoViewModel ReceberReclamacao(string reclamacao)
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+
+            var retorno = _pessoaCurriculoAppService.ObterFuncionarioReclamacao();
+
+            return retorno;
+        }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\DemissaoViewModel.cs" />
+    <Compile Include="ViewModels\FuncionarioReclamacaoViewModel.cs" />
     <Compile Include="ViewModels\FuncionarioSalarioViewModel.cs" />
     <Compile Include="ViewModels\PessoaCurriculoViewModel.cs" />
     <Compile Include="ViewModels\FuncionarioViewModel.cs" />
