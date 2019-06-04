@@ -122,5 +122,16 @@ namespace RH_API.Controllers
 
             return retorno;
         }
+
+        [AcceptVerbs("GET")]
+        [Route("ObterCustoDoRecursoPorCampanha")]
+        public FuncionarioCampanhaViewModel ObterCustoDoRecursoPorCampanha(string campanha)
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+
+            var retorno = _pessoaCurriculoAppService.ObterCustoDoRecursoPorCampanha(campanha);
+
+            return retorno;
+        }
     }
 }

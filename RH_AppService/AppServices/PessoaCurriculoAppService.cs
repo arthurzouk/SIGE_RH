@@ -40,8 +40,8 @@ namespace RH_Application.AppServices
             var pessoasAtivas = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado && y.Situacao == "Contratado")));
 
             var retorno = new List<PessoaRecrutamentoViewModel>();
-            foreach(var i in pessoasAtivas)
-            { 
+            foreach (var i in pessoasAtivas)
+            {
                 var recrutamento = Mapper.Map<RecrutamentoViewModel>(_recrutamentoRepository.ObterPrimeiroOuPadrao(x => x.PessoaCurriculoId == i.Id));
                 retorno.Add(new PessoaRecrutamentoViewModel { PessoaCurriculo = i, Recrutamento = recrutamento });
             }
@@ -96,7 +96,7 @@ namespace RH_Application.AppServices
             if (ativoOuInativo == 1)
             {
                 var tamanhoLista = pessoasAtivas.Count();
-                var indexAleatorio = random.Next(0, tamanhoLista - 1);
+                var indexAleatorio = random.Next(0, tamanhoLista);
                 var pessoaAtiva = pessoasAtivas.ElementAt(indexAleatorio);
                 return new FuncionarioReclamacaoViewModel
                 {
@@ -111,7 +111,7 @@ namespace RH_Application.AppServices
             else
             {
                 var tamanhoLista = pessoasInativas.Count();
-                var indexAleatorio = random.Next(0, tamanhoLista - 1);
+                var indexAleatorio = random.Next(0, tamanhoLista);
                 var pessoaAtiva = pessoasInativas.ElementAt(indexAleatorio);
                 return new FuncionarioReclamacaoViewModel
                 {
@@ -147,6 +147,31 @@ namespace RH_Application.AppServices
             }
 
             return retorno;
+        }
+
+        public FuncionarioCampanhaViewModel ObterCustoDoRecursoPorCampanha(string campanha)
+        {
+            var pessoasAtivas = ObterPessoasAtivas();
+
+            var random = new Random();
+            var melhoria = random.Next(1, 4);
+
+            var tamanhoLista = pessoasAtivas.Count();
+
+            var indexAleatorio = random.Next(0, tamanhoLista);
+            var pessoaAtiva = pessoasAtivas.ElementAt(indexAleatorio);
+            return new FuncionarioCampanhaViewModel
+            {
+                Campanha = campanha,
+                CPF = pessoaAtiva.PessoaCurriculo.CPF,
+                Nome = pessoaAtiva.PessoaCurriculo.Nome,
+                DataNascimento = pessoaAtiva.PessoaCurriculo.DataNascimento,
+                Endereco = pessoaAtiva.PessoaCurriculo.Endereco,
+                Escolaridade = pessoaAtiva.PessoaCurriculo.Escolaridade,
+                Curso = pessoaAtiva.PessoaCurriculo.Curso,
+                Salario = pessoaAtiva.PessoaCurriculo.Salario,
+                AreaFuncional = pessoaAtiva.Recrutamento.SetorSolicitante
+            };
         }
     }
 }
