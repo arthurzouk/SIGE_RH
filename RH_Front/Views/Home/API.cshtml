@@ -1,7 +1,79 @@
 ﻿@{
     ViewBag.Title = "API";
 }
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <h3>@ViewBag.Message</h3>
-
-<p>Use this area to provide additional information.</p>
+<hr />
+<div class="container">
+    <h4 class="text-primary">FINANCEIRO</h4>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Estratégico</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/demissao/ObterPessoasDemitidas
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Tático</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Recrutamento/ObterCurriculosAprovados
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Operacional</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/pessoa/ObterFuncionariosAtivos
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <hr />
+    <h4 class="text-primary">PRODUÇÃO</h4>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Estratégico</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">URL</li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Tático</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">URL</li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Operacional</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">URL</li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <hr />
+    <h4 class="text-primary">MARKETING</h4>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Estratégico</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/pessoa/ObterFuncionariosArea
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Tático</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ReceberReclamacao?reclamacao=blablabla
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros: reclamacao</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Operacional</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/pessoa/ObterFuncionariosSalarioArea
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+</div>
