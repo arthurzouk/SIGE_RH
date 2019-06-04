@@ -111,5 +111,16 @@ namespace RH_API.Controllers
 
             return retorno;
         }
+
+        [AcceptVerbs("GET")]
+        [Route("ObterFuncionariosEnvolvidosOperacaoEstoque")]
+        public IEnumerable<FuncionarioSalarioViewModel> ObterFuncionariosEnvolvidosOperacaoEstoque()
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+
+            var retorno = _pessoaCurriculoAppService.ObterFuncionariosPorSetor("Produção");
+
+            return retorno;
+        }
     }
 }

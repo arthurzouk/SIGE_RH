@@ -124,5 +124,29 @@ namespace RH_Application.AppServices
                 };
             }
         }
+
+        public IEnumerable<FuncionarioSalarioViewModel> ObterFuncionariosPorSetor(string setor)
+        {
+            var pessoasDaOperacao = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado && y.SetorSolicitante == setor)));
+
+            var retorno = new List<FuncionarioSalarioViewModel>();
+            foreach (var i in pessoasDaOperacao)
+            {
+                retorno.Add(new FuncionarioSalarioViewModel
+                {
+                    Id = i.Id,
+                    CPF = i.CPF,
+                    Nome = i.Nome,
+                    DataNascimento = i.DataNascimento,
+                    Endereco = i.Endereco,
+                    Escolaridade = i.Escolaridade,
+                    Curso = i.Curso,
+                    Salario = i.Salario,
+                    AreaFuncional = setor
+                });
+            }
+
+            return retorno;
+        }
     }
 }
