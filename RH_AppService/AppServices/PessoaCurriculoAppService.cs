@@ -92,7 +92,7 @@ namespace RH_Application.AppServices
 
             var random = new Random();
             var melhoria = random.Next(1, 4);
-            var ativoOuInativo = random.Next(0, 1);
+            var ativoOuInativo = random.Next(0, 2);
             if (ativoOuInativo == 1)
             {
                 var tamanhoLista = pessoasAtivas.Count();
@@ -119,7 +119,7 @@ namespace RH_Application.AppServices
                     Nome = pessoaAtiva.PessoaCurriculo.Nome,
                     AreaFuncional = pessoaAtiva.Demissao.SetorSolicitante,
                     Reclamacao = reclamacao,
-                    Situacao = "Ativo",
+                    Situacao = "Demitido",
                     Melhoria = melhoria == 1 ? "Sim" : melhoria == 2 ? "Não" : "Pendente"
                 };
             }
