@@ -107,7 +107,7 @@ namespace RH_API.Controllers
         {
             _pessoaCurriculoAppService = new PessoaCurriculoAppService();
 
-            var retorno = _pessoaCurriculoAppService.ObterFuncionarioReclamacao();
+            var retorno = _pessoaCurriculoAppService.ObterFuncionarioReclamacao(reclamacao);
 
             return retorno;
         }

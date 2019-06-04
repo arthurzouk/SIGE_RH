@@ -85,13 +85,13 @@ namespace RH_Application.AppServices
             return pessoaDemissao;
         }
 
-        public FuncionarioReclamacaoViewModel ObterFuncionarioReclamacao()
+        public FuncionarioReclamacaoViewModel ObterFuncionarioReclamacao(string reclamacao)
         {
             var pessoasAtivas = ObterPessoasAtivas();
             var pessoasInativas = ObterPessoasDemitidas();
 
             var random = new Random();
-            var melhoria = random.Next(1, 3);
+            var melhoria = random.Next(1, 4);
             var ativoOuInativo = random.Next(0, 1);
             if (ativoOuInativo == 1)
             {
@@ -103,6 +103,7 @@ namespace RH_Application.AppServices
                     CPF = pessoaAtiva.PessoaCurriculo.CPF,
                     Nome = pessoaAtiva.PessoaCurriculo.Nome,
                     AreaFuncional = pessoaAtiva.Recrutamento.SetorSolicitante,
+                    Reclamacao = reclamacao,
                     Situacao = "Ativo",
                     Melhoria = melhoria == 1 ? "Sim" : melhoria == 2 ? "Não" : "Pendente"
                 };
@@ -117,6 +118,7 @@ namespace RH_Application.AppServices
                     CPF = pessoaAtiva.PessoaCurriculo.CPF,
                     Nome = pessoaAtiva.PessoaCurriculo.Nome,
                     AreaFuncional = pessoaAtiva.Demissao.SetorSolicitante,
+                    Reclamacao = reclamacao,
                     Situacao = "Ativo",
                     Melhoria = melhoria == 1 ? "Sim" : melhoria == 2 ? "Não" : "Pendente"
                 };
