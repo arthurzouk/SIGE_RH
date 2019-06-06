@@ -48,16 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Financeiro\ApiService\ExemploApiService.cs" />
+    <Compile Include="Financeiro\ApiService\FinanceiroApiService.cs" />
     <Compile Include="Financeiro\Financeiro.cs" />
+    <Compile Include="Marketing\ApiService\MarketingApiService.cs" />
+    <Compile Include="Marketing\Marketing.cs" />
+    <Compile Include="Producao\ApiService\ProducaoApiService.cs" />
+    <Compile Include="Producao\Producao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Marketing\" />
-    <Folder Include="Producao\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
+      <Project>{D9C462BA-FDAC-47B4-834A-98B07E1BF38A}</Project>
+      <Name>RH_Dominio</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,5 @@
-﻿using RH_Front.Models;
-using RH_Front.Services;
+﻿using RH_Application.AppServices;
+using RH_Application.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +11,6 @@ namespace RH_Front.Controllers
 {
     public class HomeController : Controller
     {
-        List<DadosOperacional> ListaDeDadosOperacionais = DadosServices.GetDadosOperacional();
-        List<DadosTatico> ListaDeDadosTaticos = DadosServices.GetDadosTatico();
-        List<DadosEstrategico> ListaDeDadosEstrategicos = DadosServices.GetDadosEstrategico();
-
         public ActionResult Index()
         {
             return View();
@@ -24,6 +20,7 @@ namespace RH_Front.Controllers
         {
             ViewBag.Message = "Relatório Operacional de Recursos Humanos";
 
+            List<RelatorioOperacionalViewModel> ListaDeDadosOperacionais = new DadosRelatorioAppService().GetDadosOperacional();
             return View(ListaDeDadosOperacionais);
         }
 
@@ -31,6 +28,7 @@ namespace RH_Front.Controllers
         {
             ViewBag.Message = "Relatório Tático de Recursos Humanos";
 
+            List<RelatorioTaticoViewModel> ListaDeDadosTaticos = new DadosRelatorioAppService().GetDadosTatico();
             return View(ListaDeDadosTaticos);
         }
 
@@ -38,6 +36,7 @@ namespace RH_Front.Controllers
         {
             ViewBag.Message = "Relatório Estratégico de Recursos Humanos";
 
+            List<RelatorioEstrategicoViewModel> ListaDeDadosEstrategicos = new DadosRelatorioAppService().GetDadosEstrategico();
             return View(ListaDeDadosEstrategicos);
         }
 

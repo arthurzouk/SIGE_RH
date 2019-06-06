@@ -54,12 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppServices\DadosRelatorioAppService.cs" />
     <Compile Include="AppServices\DemissaoAppService.cs" />
     <Compile Include="AppServices\PessoaCurriculoAppService.cs" />
     <Compile Include="AppServices\RecrutamentoAppService.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\RelatorioEstrategicoViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioOperacionalViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioTaticoViewModel.cs" />
     <Compile Include="ViewModels\DemissaoViewModel.cs" />
     <Compile Include="ViewModels\FuncionarioCampanhaViewModel.cs" />
     <Compile Include="ViewModels\FuncionarioCustoPorDiaViewModel.cs" />
@@ -79,6 +83,10 @@
     <ProjectReference Include="..\RH_Domínio\RH_Dominio.csproj">
       <Project>{d9c462ba-fdac-47b4-834a-98b07e1bf38a}</Project>
       <Name>RH_Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services_API\Services_API.csproj">
+      <Project>{7264ac1a-22d4-40bb-9276-35ec8838e39f}</Project>
+      <Name>Services_API</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

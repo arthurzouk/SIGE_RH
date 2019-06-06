@@ -3,23 +3,24 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using RH_Dominio.DTO;
 
 namespace Services_API.Financeiro.ApiService
 {
-    public class ExemploApiService
+    public class FinanceiroApiService
     {
         protected Financeiro financeiro;
 
-        public ExemploApiService()
+        public FinanceiroApiService()
         {
             financeiro = new Financeiro();
         }
 
         // Trocar object pela classe de retorno
-        public object ObterExemplo()
+        public List<FluxoCaixaFinanceiroDTO> ObterFluxoCaixa()
         {
             // Recurso ofericido pela API
-            var resource = "/exemplo/exemplo";
+            var resource = "/Financeiro/GetFluxoDeCaixa";
 
             // Parâmetros a serem adicionados no recurso
             var p = new Parameter { Name = "nomeDoParametro", Value = "valorDoParametro" };
@@ -36,31 +37,9 @@ namespace Services_API.Financeiro.ApiService
             if (resposta.StatusCode.Equals(HttpStatusCode.OK))
             {
                 // O segundo parâmetro deve ser criado usando os mesmos nomes que são retornados pelo JSON. Resposta.Content é o JSON que é retornado da API.
-                var objetoAnonimo = JsonConvert.DeserializeAnonymousType(resposta.Content, new
-                {
-                    id = new long(),
-                    nickName = "",
-                    registration_date = new DateTime(),
-                    first_name = "",
-                    last_name = "",
-                    gender = "",
-                    contry_Id = "",
-                    email = ""
-                });
+                var objetoDeRetorno = JsonConvert.DeserializeObject<List<FluxoCaixaFinanceiroDTO>>(resposta.Content);
 
-                var objetoDeRetorno = new object()
-                {
-                    // Preencher aqui o objeto de retorno com as informações deserializadas no objeto anônimo
-                    // Ex: objetoDeRetorno.atributo = objetoAnonimo.informacao;
-                };
                 return objetoDeRetorno;
-            }
-            else if (resposta.StatusCode.Equals(HttpStatusCode.Unauthorized))
-            {
-                if (resposta.Content.Contains("Blablabla"))
-                {
-                    return new object();
-                }
             }
 
             throw new Exception("Não foi possível fazer a chamada na API do Financeiro");

@@ -1,13 +1,14 @@
 ﻿using RestSharp;
 using System.Collections.Generic;
 
-namespace Services_API.Financeiro
+namespace Services_API.Marketing
 {
-    public class Financeiro
+    public class Marketing
     {
         private RestClient client = new RestClient(ApiUrl);
 
-        static private string apiUrl = "http://sigefinanceiroapi.azurewebsites.net";
+        static private string apiUrl = "http://sigemv.ml";
+
         static public string ApiUrl
         {
             get
@@ -121,7 +122,7 @@ namespace Services_API.Financeiro
 
         private IRestResponse ExecuteRequest(RestRequest request)
         {
-            client.UserAgent = "Financeiro";
+            client.UserAgent = "Marketing";
             return client.Execute(request);
         }
     }
