@@ -22,6 +22,7 @@ namespace RH_Banco.EntityConfig
             Property(x => x.Escolaridade).IsRequired().HasColumnName("escolaridade");
             Property(x => x.Curso).IsRequired().HasColumnName("curso");
             Property(x => x.Salario).IsRequired().HasColumnName("salario");
+            Property(x => x.HorasAbsenteismo).IsOptional().HasColumnName("horas_absenteismo");
 
             // Relationships
             

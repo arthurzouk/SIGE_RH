@@ -28,6 +28,8 @@ namespace RH_Banco.EntityConfig
             Property(x => x.Observacoes).HasMaxLength(1000).IsOptional().HasColumnName("observacoes");
             Property(x => x.PessoaCurriculoId).HasColumnName("pessoa_id");
             Property(x => x.Custo).IsRequired().HasColumnName("custo");
+            Property(x => x.Cargo).IsOptional().HasColumnName("cargo");
+            Property(x => x.PeriodoTrabalho).IsOptional().HasColumnName("periodo_trabalhado");
 
             // Relationships
             HasRequired(x => x.PessoaCurriculo).WithMany(x => x.Recrutamentos).HasForeignKey(x => x.PessoaCurriculoId);
