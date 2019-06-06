@@ -133,5 +133,16 @@ namespace RH_API.Controllers
 
             return retorno;
         }
+
+        [AcceptVerbs("GET")]
+        [Route("ObterCustoDoFuncionarioPorDiaTrabalhado")]
+        public IEnumerable<FuncionarioCustoPorDiaViewModel> ObterCustoDoFuncionarioPorDiaTrabalhado(string area)
+        {
+            _pessoaCurriculoAppService = new PessoaCurriculoAppService();
+
+            var retorno = _pessoaCurriculoAppService.ObterCustoDoFuncionarioPorDia(area);
+
+            return retorno;
+        }
     }
 }

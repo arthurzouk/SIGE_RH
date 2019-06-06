@@ -173,5 +173,29 @@ namespace RH_Application.AppServices
                 AreaFuncional = pessoaAtiva.Recrutamento.SetorSolicitante
             };
         }
+
+        public IEnumerable<FuncionarioCustoPorDiaViewModel> ObterCustoDoFuncionarioPorDia(string area)
+        {
+            var pessoasDaOperacao = Mapper.Map<IEnumerable<PessoaCurriculoViewModel>>(_pessoaCurriculoRepository.ObterOnde(x => x.Recrutamentos.Any(y => y.Aprovado && y.SetorSolicitante == area)));
+
+            var retorno = new List<FuncionarioCustoPorDiaViewModel>();
+            foreach (var i in pessoasDaOperacao)
+            {
+                retorno.Add(new FuncionarioCustoPorDiaViewModel
+                {
+                    Id = i.Id,
+                    CPF = i.CPF,
+                    Nome = i.Nome,
+                    DataNascimento = i.DataNascimento,
+                    Endereco = i.Endereco,
+                    Escolaridade = i.Escolaridade,
+                    Curso = i.Curso,
+                    CustoPorDia = (i.Salario / 30),
+                    AreaFuncional = area
+                });
+            }
+
+            return retorno;
+        }
     }
 }

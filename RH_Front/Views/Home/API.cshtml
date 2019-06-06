@@ -5,6 +5,56 @@
 <h3>@ViewBag.Message</h3>
 <hr />
 <div class="container">
+    <h2 class="text-success">Endpoints que podem ser úteis</h2>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter todos os currículos (Currículo, Pessoa e Funcionário sao abstraídos no mesmo ID)</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterTodosCurriculos
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter currículo por CPF</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterPorCpf?cpf=03634858800
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros: cpf</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter funcionários ativos com info do processo de recrutamento</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterFuncionariosAtivos
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter funcionários ativos com info do processo de demissão</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterFuncionariosDemitidos
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter todos processos de recrutamento</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Recrutamento/ObterProcessosRecrutamento
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-success">Obter todos processos de demissão</li>
+        <li class="list-group-item list-group-item-info">GET</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Demissao/ObterProcessosDemissao
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+    </ul>
+
     <h4 class="text-primary">FINANCEIRO</h4>
     <ul class="list-group">
         <li class="list-group-item list-group-item-success">Estratégico</li>
@@ -35,8 +85,10 @@
     <ul class="list-group">
         <li class="list-group-item list-group-item-success">Estratégico</li>
         <li class="list-group-item list-group-item-info">GET</li>
-        <li class="list-group-item list-group-item-warning">URL</li>
-        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterCustoDoRecursoPorCampanha?campanha=teste
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros: campanha</li>
     </ul>
     <ul class="list-group">
         <li class="list-group-item list-group-item-success">Tático</li>
@@ -49,8 +101,10 @@
     <ul class="list-group">
         <li class="list-group-item list-group-item-success">Operacional</li>
         <li class="list-group-item list-group-item-info">GET</li>
-        <li class="list-group-item list-group-item-warning">URL</li>
-        <li class="list-group-item list-group-item-danger">Parâmetros:</li>
+        <li class="list-group-item list-group-item-warning">
+            URL: http://apisigerecursoshumanos.azurewebsites.net/api/Pessoa/ObterCustoDoFuncionarioPorDiaTrabalhado?area=Produção
+        </li>
+        <li class="list-group-item list-group-item-danger">Parâmetros: area (Escolher uma: Recrusos Humanos, Produção, Financeiro, Marketing e Vendas)</li>
     </ul>
     <hr />
     <h4 class="text-primary">MARKETING</h4>
