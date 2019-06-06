@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\FluxoCaixaFinanceiroDTO.cs" />
+    <Compile Include="DTO\LucroPorProdutoFinanceiroDTO.cs" />
     <Compile Include="DTO\ItemProducaoDTO.cs" />
     <Compile Include="DTO\ItemPromocaoMarketingDTO.cs" />
     <Compile Include="DTO\VendaProducaoDTO.cs" />

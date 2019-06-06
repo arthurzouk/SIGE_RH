@@ -7,6 +7,7 @@ using Services_API.Marketing.ApiService;
 using Services_API.Producao.ApiService;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -20,6 +21,7 @@ namespace RH_Application.AppServices
         private ProducaoApiService _producaoApiService;
         private MarketingApiService _marketingApiService;
         private FinanceiroApiService _financeiroApiService;
+        private List<DadosRelatoriosViewModel> _todosOsDados;
 
         public DadosRelatorioAppService()
         {
@@ -29,6 +31,7 @@ namespace RH_Application.AppServices
             _producaoApiService = new ProducaoApiService();
             _marketingApiService = new MarketingApiService();
             _financeiroApiService = new FinanceiroApiService();
+            _todosOsDados = new List<DadosRelatoriosViewModel>();
         }
 
         public void AgruparDados()
@@ -56,58 +59,240 @@ namespace RH_Application.AppServices
             var listaProdutosPromocao = _marketingApiService.ObterListaProdutos();
 
             //Lista de preços dos produtos - FINANCEIRO
-            //Fluxo de caixa http://sigefinanceiroapi.azurewebsites.net/Financeiro/GetFluxoDeCaixa
+            //Fluxo de caixa http://sigefinanceiroapi.azurewebsites.net/Financeiro/LucroPorProduto
 
-            var fluxoCaixa = _financeiroApiService.ObterFluxoCaixa();
+            var lucroPorProdutos = _financeiroApiService.ObterLucroPorProduto();
+
+            DadosRelatoriosViewModel dado;
+
+            string CPF;
+            string Nome;
+            string Cargo;
+            string PeriodoTrabalho;
+            string nomeprod;
+            string valorRealParaEmpresa;
+            bool isPromotion;
+
+            for (int i = 0; i < listaVendas.Count; i++)
+            {
+                CPF = string.Empty;
+                Nome = string.Empty;
+                Cargo = string.Empty;
+                PeriodoTrabalho = string.Empty;
+                nomeprod = string.Empty;
+                valorRealParaEmpresa = string.Empty;
+                isPromotion = false;
+
+
+
+                for (int j = 0; j < listaProdutosPromocao.Count; j++)
+                {
+                    if (listaVendas[i].codprod == listaProdutosPromocao[j].ID)
+                    {
+                        //armazenar dados da venda
+                        isPromotion = true;
+                        break;
+                    }
+                }
+
+                try
+                {
+                    if (isPromotion)
+                    {
+                        for (int j = 0; j < listaProdutos.Count; j++)
+                        {
+                            if (listaVendas[i].codprod == listaProdutos[j].codprod)
+                            {
+                                //armazenar dados do produto
+                                nomeprod = listaProdutos[j].nomeprod;
+                                break;
+                            }
+                        }
+
+                        for (int j = 0; j < pessoas.Count; j++)
+                        {
+                            //armazenar dados do operador
+
+                            //if (listaVendas[i].idOperador.ToString() == pessoas[j].PessoaCurriculo.Id)
+                            //{
+                            //CPF = pessoas[j].PessoaCurriculo.CPF;
+                            //Nome = pessoas[j].PessoaCurriculo.Nome;
+                            //Cargo = pessoas[j].Recrutamento.Cargo;
+                            //PeriodoTrabalho = pessoas[j].Recrutamento.PeriodoTrabalho;
+                            //break;
+                            //}
+
+                            CPF = pessoas[i].PessoaCurriculo.CPF;
+                            Nome = pessoas[i].PessoaCurriculo.Nome;
+                            Cargo = pessoas[i].Recrutamento.Cargo;
+                            PeriodoTrabalho = pessoas[i].Recrutamento.PeriodoTrabalho;
+                        }
+
+                        for (int j = 0; j < lucroPorProdutos.Count; j++)
+                        {
+                            if (listaVendas[i].codprod == lucroPorProdutos[j].idProduto)
+                            {
+                                //armazenar dados do lucro real
+                                valorRealParaEmpresa = lucroPorProdutos[j].valorRealParaEmpresa;
+                                break;
+                            }
+                        }
+
+                        dado = new DadosRelatoriosViewModel()
+                        {
+                            CPF = CPF,
+                            Nome = Nome,
+                            Cargo = Cargo,
+                            PeriodoTrabalho = PeriodoTrabalho,
+                            nomeprod = nomeprod,
+                            valorRealParaEmpresa = valorRealParaEmpresa,
+                            dtvenda = listaVendas[i].dtvenda,
+                            qtdvenda = listaVendas[i].qtdvenda
+                        };
+
+                        _todosOsDados.Add(dado);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+
+
         }
 
         public List<RelatorioOperacionalViewModel> GetDadosOperacional()
         {
             AgruparDados();
+
             var listaDadosOperacional = new List<RelatorioOperacionalViewModel>();
 
+            RelatorioOperacionalViewModel dadoOperacional;
+
+            for (int i = 0; i < _todosOsDados.Count; i++)
+            {
+                dadoOperacional = new RelatorioOperacionalViewModel()
+                {
+                    CPF = _todosOsDados[i].CPF,
+                    Cargo = _todosOsDados[i].Cargo,
+                    Funcionario = _todosOsDados[i].Nome,
+                    Jornada = _todosOsDados[i].Cargo == "estagiario" ? "06:00" : "08:00",
+                    Periodo = _todosOsDados[i].PeriodoTrabalho.ToUpper(),
+                    QuantidadeVendida = _todosOsDados[i].qtdvenda,
+                    Produto = _todosOsDados[i].nomeprod,
+                    VolumeFinanceiro = (_todosOsDados[i].qtdvenda * Double.Parse(_todosOsDados[i].valorRealParaEmpresa.Replace("$", ""))).ToString("C", CultureInfo.CurrentCulture),
+                    data = _todosOsDados[i].dtvenda
+                };
+
+                listaDadosOperacional.Add(dadoOperacional);
+            }
 
 
-
-
-            //{
-            //    new DadosOperacional { Matricula=01, Cargo="Estágiário Operador de caixa", Funcionario="Heloisa Sousa", Jornada= "06:00", Periodo= "M", QuantidadeVencida=165, VolumeFinanceiro="R$ 1,155.00"},
-            //    new DadosOperacional { Matricula=02, Cargo="Operador de caixa", Funcionario="Vanessa Marques", Jornada= "08:00", Periodo= "V", QuantidadeVencida=127, VolumeFinanceiro="R$ 889.00"},
-            //    new DadosOperacional { Matricula=03, Cargo="Operador de caixa", Funcionario="Letícia Fonseca", Jornada= "08:00", Periodo= "N", QuantidadeVencida=135, VolumeFinanceiro="R$ 945.00"},
-            //    new DadosOperacional { Matricula=04, Cargo="Estágiário Operador de caixa", Funcionario="Leonardo Carvalho", Jornada= "06:00", Periodo="M", QuantidadeVencida=66, VolumeFinanceiro="R$ 462.00"},
-            //    new DadosOperacional { Matricula=05, Cargo="Estágiário Operador de caixa", Funcionario="Thais Santots", Jornada= "06:00", Periodo="M", QuantidadeVencida=82, VolumeFinanceiro="R$ 574.00"},
-            //    new DadosOperacional { Matricula=06, Cargo="Operador de caixa", Funcionario="Lucas Fonseca", Jornada= "08:00", Periodo="M", QuantidadeVencida=186, VolumeFinanceiro="R$ 1,302.00"},
-            //    new DadosOperacional { Matricula=07, Cargo="Operador de caixa", Funcionario="Karina Gomes", Jornada= "08:00", Periodo="N", QuantidadeVencida=153, VolumeFinanceiro="R$ 1,071.00"},
-            //    new DadosOperacional { Matricula=08, Cargo="Operador de caixa", Funcionario="Gláucia Franco", Jornada= "08:00", Periodo="V", QuantidadeVencida=80, VolumeFinanceiro="R$ 560.00"},
-            //    new DadosOperacional { Matricula=09, Cargo="Estágiário Operador de caixa", Funcionario="Liz Castro", Jornada= "06:00", Periodo="V", QuantidadeVencida=135, VolumeFinanceiro="R$ 945.00"},
-            //    new DadosOperacional { Matricula=10, Cargo="Estágiário Operador de caixa", Funcionario="Maria de Fátima", Jornada= "06:00", Periodo="V", QuantidadeVencida=179, VolumeFinanceiro="R$ 1,253.00"},
-            //    new DadosOperacional { Matricula=11, Cargo="Operador de caixa", Funcionario="Solange Silva", Jornada= "08:00", Periodo="V", QuantidadeVencida=132, VolumeFinanceiro="R$ 924.00"},
-            //    new DadosOperacional { Matricula=12, Cargo="Operador de caixa", Funcionario="Robson Santos", Jornada= "08:00", Periodo="M", QuantidadeVencida=151, VolumeFinanceiro="R$ 1,057.00"}
-            //};
             return listaDadosOperacional;
 
         }
 
         public List<RelatorioTaticoViewModel> GetDadosTatico()
         {
+            AgruparDados();
+
             var listaDadosTatico = new List<RelatorioTaticoViewModel>();
 
-            //{
-            //    new DadosTatico { Cargo="Estágiário Operador de caixa", Funcionario="Heloisa Sousa", VolumeFinanceiro="R$ 1,155.00" , ProdutoPromocao ="A", QuantidadeVencida=165},
-            //    new DadosTatico { Cargo="Operador de caixa", Funcionario="Vanessa Marques", VolumeFinanceiro="R$ 889.00", ProdutoPromocao ="A", QuantidadeVencida=127},
-            //    new DadosTatico { Cargo="Operador de caixa", Funcionario="Letícia Fonseca", VolumeFinanceiro="R$ 945.00", ProdutoPromocao ="A", QuantidadeVencida=135},
-            //    new DadosTatico { Cargo="Estágiário Operador de caixa", Funcionario="Leonardo Carvalho", VolumeFinanceiro="R$ 462.00", ProdutoPromocao ="B", QuantidadeVencida=66},
-            //    new DadosTatico { Cargo="Estágiário Operador de caixa", Funcionario="Thais Santots", VolumeFinanceiro="R$ 574.00", ProdutoPromocao ="B", QuantidadeVencida=82},
-            //    new DadosTatico { Cargo="Operador de caixa", Funcionario="Lucas Fonseca", VolumeFinanceiro="R$ 1,302.00", ProdutoPromocao ="B", QuantidadeVencida=186}
-            //};
+            RelatorioTaticoViewModel dadoTatico;
+
+            for (int i = 0; i < _todosOsDados.Count; i++)
+            {
+                dadoTatico = new RelatorioTaticoViewModel()
+                {
+                    Cargo = _todosOsDados[i].Cargo,
+                    Funcionario = _todosOsDados[i].Nome,
+                    ProdutoPromocao = _todosOsDados[i].nomeprod,
+                    QuantidadeVendida = _todosOsDados[i].qtdvenda,
+                    VolumeFinanceiro = (_todosOsDados[i].qtdvenda * Double.Parse(_todosOsDados[i].valorRealParaEmpresa.Replace("$", ""))).ToString("C", CultureInfo.CurrentCulture),
+                    data = _todosOsDados[i].dtvenda
+                };
+
+                listaDadosTatico.Add(dadoTatico);
+            }
+
             return listaDadosTatico;
 
         }
 
         public List<RelatorioEstrategicoViewModel> GetDadosEstrategico()
         {
+            AgruparDados();
+
             var listaDadosEstrategico = new List<RelatorioEstrategicoViewModel>();
 
+            RelatorioEstrategicoViewModel dadoEstrategico;
+            string cargo;
+            string cargaHoraria;
+            string assiduidade;
+            double volumeFinanceiro;
+
+            string auxCargo = string.Empty;
+            int qtdCargos = 0;
+
+            for (int i = 0; i < _todosOsDados.Count; i++)
+            {
+                if (auxCargo == string.Empty
+                    || !auxCargo.Contains(_todosOsDados[i].Cargo))
+                {
+                    auxCargo += _todosOsDados[i].Cargo + "|";
+                    qtdCargos++;
+                }
+            }
+
+            string[] auxCargos = auxCargo.Split('|');
+
+            for (int i = 0; i < qtdCargos; i++)
+            {
+                cargo = string.Empty;
+                cargaHoraria = string.Empty;
+                assiduidade = string.Empty;
+                volumeFinanceiro = 0;
+
+                for (int j = 0; j < _todosOsDados.Count; j++)
+                {
+                    if (auxCargos[i].Contains(_todosOsDados[j].Cargo))
+                    {
+                        cargo = _todosOsDados[j].Cargo;
+                        cargaHoraria = "600";
+                        assiduidade = "580";
+                        volumeFinanceiro = volumeFinanceiro + (_todosOsDados[j].qtdvenda * Double.Parse(_todosOsDados[j].valorRealParaEmpresa.Replace("$", "")));
+                    }
+                }
+
+                dadoEstrategico = new RelatorioEstrategicoViewModel()
+                {
+                    Cargo = cargo,
+                    CargaHoraria = cargaHoraria,
+                    Assiduidade = assiduidade,
+                    VolumeFinanceiro = volumeFinanceiro.ToString("C", CultureInfo.CurrentCulture)
+                };
+
+                listaDadosEstrategico.Add(dadoEstrategico);
+            }
+
+            //for (int i = 0; i < _todosOsDados.Count; i++)
+            //{
+            //    if (_todosOsDados[i].Cargo == "estagiario")
+            //    {
+
+            //    }
+
+            //    dadoEstrategico = new RelatorioEstrategicoViewModel()
+            //    {
+            //        Cargo = _todosOsDados[i].Cargo,
+            //        VolumeFinanceiro = (_todosOsDados[i].qtdvenda * Double.Parse(_todosOsDados[i].valorRealParaEmpresa.Replace("$", ""))).ToString("C", CultureInfo.CurrentCulture),
+            //        data = _todosOsDados[i].dtvenda
+            //    };
+
+            //    listaDadosEstrategico.Add(dadoEstrategico);
+            //}
 
             //{
             //    new DadosEstrategico { Cargo="Estágiário Operador de caixa", CargaHoraria="600", Assiduidade="588", VolumeFinanceiro="500"},

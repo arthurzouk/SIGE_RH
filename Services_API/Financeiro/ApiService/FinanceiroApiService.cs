@@ -17,10 +17,10 @@ namespace Services_API.Financeiro.ApiService
         }
 
         // Trocar object pela classe de retorno
-        public List<FluxoCaixaFinanceiroDTO> ObterFluxoCaixa()
+        public List<LucroPorProdutoFinanceiroDTO> ObterLucroPorProduto()
         {
             // Recurso ofericido pela API
-            var resource = "/Financeiro/GetFluxoDeCaixa";
+            var resource = "/Financeiro/LucroPorProduto";
 
             // Parâmetros a serem adicionados no recurso
             var p = new Parameter { Name = "nomeDoParametro", Value = "valorDoParametro" };
@@ -37,7 +37,7 @@ namespace Services_API.Financeiro.ApiService
             if (resposta.StatusCode.Equals(HttpStatusCode.OK))
             {
                 // O segundo parâmetro deve ser criado usando os mesmos nomes que são retornados pelo JSON. Resposta.Content é o JSON que é retornado da API.
-                var objetoDeRetorno = JsonConvert.DeserializeObject<List<FluxoCaixaFinanceiroDTO>>(resposta.Content);
+                var objetoDeRetorno = JsonConvert.DeserializeObject<List<LucroPorProdutoFinanceiroDTO>>(resposta.Content);
 
                 return objetoDeRetorno;
             }

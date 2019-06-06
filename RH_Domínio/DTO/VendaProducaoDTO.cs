@@ -12,5 +12,6 @@ namespace RH_Dominio.DTO
         public int qtdvenda { get; set; }
         public int vlrunit { get; set; } //verificar se vem do financeiro
         public string dtvenda { get; set; }
+        public int idOperador { get; set; }
     }
 }

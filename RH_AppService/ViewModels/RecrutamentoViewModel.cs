@@ -17,6 +17,8 @@ namespace RH_Application.ViewModels
         public string Responsavel { get; set; }
         public string Situacao { get; set; }
         public string PerfilVaga { get; set; }
+        public string Cargo { get; set; }
+        public string PeriodoTrabalho { get; set; }
         public string TestesAAplicar { get; set; }
         public string Entrevistador { get; set; }
         public bool Aprovado { get; set; }

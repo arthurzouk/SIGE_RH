@@ -11,7 +11,7 @@ namespace RH_Application.ViewModels
         public string Funcionario { get; set; }
         public string VolumeFinanceiro { get; set; }
         public string ProdutoPromocao { get; set; }
-        public int QuantidadeVencida { get; set; }
+        public int QuantidadeVendida { get; set; }
         public string data { get; set; }
     }
 }
