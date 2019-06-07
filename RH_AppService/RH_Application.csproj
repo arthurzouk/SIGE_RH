@@ -64,6 +64,7 @@
     <Compile Include="ViewModels\DadosRelatoriosViewModel.cs" />
     <Compile Include="ViewModels\RelatorioEstrategicoViewModel.cs" />
     <Compile Include="ViewModels\RelatorioOperacionalViewModel.cs" />
+    <Compile Include="ViewModels\RelatorioEstrategicoChartViewModel.cs" />
     <Compile Include="ViewModels\RelatorioTaticoViewModel.cs" />
     <Compile Include="ViewModels\DemissaoViewModel.cs" />
     <Compile Include="ViewModels\FuncionarioCampanhaViewModel.cs" />

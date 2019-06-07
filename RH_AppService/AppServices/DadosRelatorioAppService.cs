@@ -277,30 +277,79 @@ namespace RH_Application.AppServices
                 listaDadosEstrategico.Add(dadoEstrategico);
             }
 
-            //for (int i = 0; i < _todosOsDados.Count; i++)
-            //{
-            //    if (_todosOsDados[i].Cargo == "estagiario")
-            //    {
-
-            //    }
-
-            //    dadoEstrategico = new RelatorioEstrategicoViewModel()
-            //    {
-            //        Cargo = _todosOsDados[i].Cargo,
-            //        VolumeFinanceiro = (_todosOsDados[i].qtdvenda * Double.Parse(_todosOsDados[i].valorRealParaEmpresa.Replace("$", ""))).ToString("C", CultureInfo.CurrentCulture),
-            //        data = _todosOsDados[i].dtvenda
-            //    };
-
-            //    listaDadosEstrategico.Add(dadoEstrategico);
-            //}
-
-            //{
-            //    new DadosEstrategico { Cargo="Estágiário Operador de caixa", CargaHoraria="600", Assiduidade="588", VolumeFinanceiro="500"},
-            //    new DadosEstrategico { Cargo="Operador de caixa", CargaHoraria="800", Assiduidade="790", VolumeFinanceiro="1000"}
-            //};
-
             return listaDadosEstrategico;
 
+        }
+
+        public RelatorioEstrategicoChartViewModel GetDadosEstrategicoCHART()
+        {
+            AgruparDados();
+
+            RelatorioEstrategicoChartViewModel dadoEstrategicoChart;
+            string cargo1;
+            string cargo2;
+            double volumeFinanceiro1;
+            double volumeFinanceiro2;
+
+            string auxCargo = string.Empty;
+            int qtdCargos = 0;
+
+            for (int i = 0; i < _todosOsDados.Count; i++)
+            {
+                if (auxCargo == string.Empty
+                    || !auxCargo.Contains(_todosOsDados[i].Cargo))
+                {
+                    auxCargo += _todosOsDados[i].Cargo + "|";
+                    qtdCargos++;
+                }
+            }
+
+            string[] auxCargos = auxCargo.Split('|');
+
+            cargo1 = string.Empty;
+            cargo2 = string.Empty;
+            volumeFinanceiro1 = 0;
+            volumeFinanceiro2 = 0;
+            string cargoaux;
+            double volumeFinanceiroaux;
+
+            for (int i = 0; i < qtdCargos; i++)
+            {
+                cargoaux = string.Empty;
+                volumeFinanceiroaux = 0;
+
+                for (int j = 0; j < _todosOsDados.Count; j++)
+                {
+                    if (auxCargos[i].Contains(_todosOsDados[j].Cargo))
+                    {
+                        cargoaux = _todosOsDados[j].Cargo;
+                        volumeFinanceiroaux = volumeFinanceiroaux + (_todosOsDados[j].qtdvenda * Double.Parse(_todosOsDados[j].valorRealParaEmpresa.Replace("$", "")));
+                    }
+                }
+
+                if (i == 0)
+                {
+                    cargo1 = cargoaux;
+                    volumeFinanceiro1 = volumeFinanceiroaux;
+                }
+                else
+                {
+                    cargo2 = cargoaux;
+                    volumeFinanceiro2 = volumeFinanceiroaux;
+                }
+
+            }
+
+            dadoEstrategicoChart = new RelatorioEstrategicoChartViewModel()
+            {
+                Cargo1 = cargo1,
+                Cargo2 = cargo2,
+                Volumefinanceiro1 = volumeFinanceiro1.ToString(),
+                Volumefinanceiro2 = volumeFinanceiro2.ToString()
+            };
+
+
+            return dadoEstrategicoChart;
         }
     }
 }

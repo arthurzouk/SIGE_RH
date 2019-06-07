@@ -58,38 +58,20 @@ namespace RH_Front.Controllers
                 .Write();
             return null;
 
-    //        Usando data base para fazer o gráfico
-    //        @{
-    //            var db = Database.Open("SmallBakery");
-    //            var data = db.Query("SELECT Name, Price FROM Product");
-    //            var myChart = new Chart(width: 600, height: 400)
-    //                .AddTitle("Product Sales")
-    //                .DataBindTable(dataSource: data, xField: "Name")
-    //                .Write();
-    //        }
-            
         }
 
         public ActionResult ChartEstrategico()
         {
+            RelatorioEstrategicoChartViewModel ListaDeDadosEstrategicosCHART = new DadosRelatorioAppService().GetDadosEstrategicoCHART();
+
             var myChart = new Chart(width: 400, height: 260)
                 .AddTitle("Gráfico Estratégico")
                 .AddSeries(
-                    name: "Employee",
-                    xValue: new[] { "Peter", "Andrew", "Julie", "Mary", "Dave" },
-                    yValues: new[] { "2", "6", "4", "5", "3" })
+                    name: "Volume financeiro vendido de produtos em promoção  por cargo",
+                    xValue: new[] { ListaDeDadosEstrategicosCHART.Cargo1, ListaDeDadosEstrategicosCHART.Cargo2 },
+                    yValues: new[] { ListaDeDadosEstrategicosCHART.Volumefinanceiro1, ListaDeDadosEstrategicosCHART.Volumefinanceiro2 })
                 .Write();
             return null;
-
-            //        Usando data base para fazer o gráfico
-            //        @{
-            //            var db = Database.Open("SmallBakery");
-            //            var data = db.Query("SELECT Name, Price FROM Product");
-            //            var myChart = new Chart(width: 600, height: 400)
-            //                .AddTitle("Product Sales")
-            //                .DataBindTable(dataSource: data, xField: "Name")
-            //                .Write();
-            //        }
 
         }
     }

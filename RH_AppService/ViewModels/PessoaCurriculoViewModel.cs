@@ -17,5 +17,6 @@ namespace RH_Application.ViewModels
         public string Escolaridade { get; set; }
         public string Curso { get; set; }
         public decimal Salario { get; set; }
+        public int HorasAbsenteismo { get; set; }
     }
 }
